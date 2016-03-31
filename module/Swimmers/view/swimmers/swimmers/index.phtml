@@ -1,0 +1,110 @@
+<?php
+
+$title = 'Witamy na stronie głównej zawodów pływackich';
+$this->headTitle($title);
+?>
+<h1><?php $title ?></h1>
+<?php
+
+if (!$isAuthenticated) {
+    ?>
+    <p>
+        <?= $this->zfcUserLoginWidget() ?>
+    </p>
+    <?php
+} else {
+    ?>
+    <a href="<?= $this->url('zfcuser/logout') ?>" class="btn btn-info">Logout</a>
+    <?php
+};
+?>
+<h3>Lista zawodników w kategorii amator</h3>
+    <table class="table">
+        <tr>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>Wiek</th>
+            <th>email</th>
+            <th>Adres</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+        </tr>
+        <?php
+
+        foreach ($allAmateurs as $participant) : ?>
+            <tr>
+                <td><?php echo $participant->firstName; ?></td>
+                <td><?php echo $participant->lastName; ?></td>
+                <td><?php echo $participant->age; ?></td>
+                <td><?php echo $participant->email; ?></td>
+                <td><?php echo $participant->address; ?></td>
+                <?php
+                if ($isAuthenticated) {
+                    ?>
+                    <td><a href="<?php echo $this->url('swimmers', ['action' => 'edit', 'id' => $participant->id]); ?>"
+                           class="btn btn-info">Edytuj </a></td>
+
+                        <td><a href="<?= $this->url('swimmers', ['action' => 'delete', 'id' => $participant->id]) ?>"
+                           class="btn btn-info">Usuń</a>
+                    </td>
+                <?php } else { ?>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                <?php }
+                ?>
+
+            </tr>
+            <?php
+        endforeach; ?>
+    </table>
+<?php
+if (!$isListAmateursFull) {
+    ?><a href="<?= $this->url('swimmers', ['action' => 'add']) ?>"
+         class="btn btn-info">Dodaj uczestnika</a><?php
+} else {
+    ?> <p class="btn btn-danger">Przepraszamy, lista jest już pełna!</p>  <?php
+}
+?>
+    <h3>Lista zawodników w kategorii zawodowcy</h3>
+    <table class="table">
+        <tr>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>Wiek</th>
+            <th>email</th>
+            <th>Adres</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+        </tr>
+        <?php
+        foreach ($allProfessionals as $participant) : ?>
+            <tr>
+                <td><?php echo $participant->firstName; ?></td>
+                <td><?php echo $participant->lastName; ?></td>
+                <td><?php echo $participant->age; ?></td>
+                <td><?php echo $participant->email; ?></td>
+                <td><?php echo $participant->address; ?></td>
+                <?php
+                if ($isAuthenticated) {
+                    ?>
+                    <td><a href="<?php echo $this->url('swimmers', ['action' => 'edit', 'id' => $participant->id]); ?>"
+                           class="btn btn-info">Edytuj </a></td>
+
+                    <td><a href="<?= $this->url('swimmers', ['action' => 'delete', 'id' => $participant->id]) ?>"
+                           class="btn btn-info">Usuń</a>
+                    </td>
+                <?php } else { ?>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                <?php }
+                ?>
+            </tr>
+            <?php
+        endforeach; ?>
+    </table>
+   <?php if (!$isListProfessionalsFull) {
+    ?><a href="<?= $this->url('swimmers', ['action' => 'add']) ?>"
+         class="btn btn-info">Dodaj uczestnika</a><?php
+} else {
+    ?> <p class="btn btn-danger">Przepraszamy, lista jest już pełna!</p>  <?php
+}

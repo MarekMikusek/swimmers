@@ -1,0 +1,9 @@
+<?php
+$title = 'Lista zawodników jest pełna';
+$this->headTitle($title);
+?>
+    <h1>Lista zawodników w wybranej kategorii jest pełna!</h1>
+    <h3>Spróbuj później:)</h3>
+    <a href="<?= $this->url('swimmers', ['action' => 'index']) ?>"
+       class="btn btn-info">Powrót na stronę główną</a>
+<?php

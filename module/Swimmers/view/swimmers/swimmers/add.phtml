@@ -1,0 +1,13 @@
+<?php
+
+$title = 'Dodaj zawodnika';
+$this->headTitle($title);
+?>
+    <h1><?= $this->escapeHtml($title) ?></h1>
+    <p>
+        <a href="<?= $this->url('swimmers') ?>" class="btn btn-info">Powrót na stronę główną</a>
+    </p>
+<?php
+/** @var \Swimmers\Form\SwimmerForm $form */
+
+echo $this->form($form);

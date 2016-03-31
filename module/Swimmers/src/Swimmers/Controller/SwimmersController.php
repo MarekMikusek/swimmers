@@ -40,7 +40,7 @@ class SwimmersController extends AbstractSwimmersController
             if ($form->isValid()) {
                 /** @var Swimmer $swimmer */
                 $swimmer = $form->getData();
-                if (count($this->getListOfSwimmersByCategory($swimmer->getIsProfessional()))>5){
+                if (count($this->getListOfSwimmersByCategory((int)$swimmer->getIsProfessional()))>5){
                     return $this->redirect()->toRoute('swimmers',['action'=>'showErrorMessage']);
                 }
                 $swimmersService = $this->getServiceLocator()->get('SwimmersService');
@@ -104,7 +104,7 @@ class SwimmersController extends AbstractSwimmersController
         ];
     }
 
-    public function showErrorMessage()
+    public function showErrorMessageAction()
     {
         return;
     }
